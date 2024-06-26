@@ -2,7 +2,6 @@ package vultr
 
 import (
 	"context"
-	"strconv"
 	"sync"
 	"time"
 
@@ -73,7 +72,7 @@ func (p *Provider) addDNSRecord(ctx context.Context, domain string, record libdn
 	domainRecordReq := &govultr.DomainRecordReq{
 		Name: record.Name,
 		Type: record.Type,
-		Data: strconv.Quote(record.Value),
+		Data: record.Value,
 		TTL:  int(record.TTL.Seconds()),
 	}
 
@@ -110,7 +109,7 @@ func (p *Provider) updateDNSRecord(ctx context.Context, domain string, record li
 	domainRecordReq := &govultr.DomainRecordReq{
 		Name: record.Name,
 		Type: record.Type,
-		Data: strconv.Quote(record.Value),
+		Data: record.Value,
 		TTL:  int(record.TTL.Seconds()),
 	}
 
